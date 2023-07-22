@@ -30,6 +30,17 @@ methods: {
             console.log(response.data.results);
             this.store.movies = response.data.results;
         });
+
+        axios.get('https://api.themoviedb.org/3/search/tv',{
+            params: {
+                api_key: '613268612b38b5bd860bdf0ba8565e74',
+                query: this.store.searchText
+            }
+        })
+        .then(response => {
+            console.log(response.data.results);
+            this.store.series = response.data.results;
+        });
     }
 }
 };
