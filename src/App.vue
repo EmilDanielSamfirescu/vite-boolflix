@@ -3,6 +3,7 @@ import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import axios from 'axios';
+import {store} from './store.js';
 
 export default {
     components: {
@@ -12,23 +13,22 @@ export default {
 },
 data (){
     return {
-        searchText: '',
-        movies: []
+        store
     }
 },
 methods: {
     search() {
-        console.log(this.searchText)
+        console.log(this.store.searchText)
 
         axios.get('https://api.themoviedb.org/3/search/movie',{
             params: {
                 api_key: '613268612b38b5bd860bdf0ba8565e74',
-                query: this.searchText
+                query: this.store.searchText
             }
         })
         .then(response => {
             console.log(response.data.results);
-            this.movies = response.data.results;
+            this.store.movies = response.data.results;
         });
     }
 }
@@ -38,34 +38,12 @@ methods: {
 
 <template>
 
+    <HeaderComponent @performSearch="search()"/>
 
-    <header>
-        <input 
-            type="text" 
-            placeholder="cerca..."
-            v-model="searchText">
-        <button @click="search()">
-            Cerca
-        </button>
-    </header>
-
-    <main>
-        <ul>
-            <li v-for="(movie, i) in movies" :key="i">
-                <ol>
-                    <li>{{ movie.title }}</li>
-                    <li>{{ movie.original_title }}</li>
-                    <li>{{ movie.original_language }}</li>
-                    <li>{{ movie.vote_average }}</li>
-                </ol>
-            </li>
-        </ul>
-    </main>
-
-
-    <!-- <HeaderComponent/>
     <MainComponent />
-    <FooterComponent /> -->
+
+    <FooterComponent />
+
 </template>
 
 <style lang="scss">
