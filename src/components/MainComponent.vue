@@ -44,29 +44,38 @@ export default {
         <h2>
             Movies
         </h2>
-        <ul>
-            <li v-for="(movie, i) in store.movies" :key="i">
+        <div class="movie-container">
+            <div v-for="(movie, i) in store.movies" :key="i">
 
                 <SingleElement :elementData="movie"/>
                 
-            </li>
-        </ul>
+            </div>
+        </div>
 
         <h2>
             Series
         </h2>
-        <ul>
-            <li v-for="(singleSeries, i) in store.series" :key="i">
+        <div class="series-container">
+            <div v-for="(singleSeries, i) in store.series" :key="i">
 
                 <SingleElement :elementData="singleSeries"/>
                 
-            </li>
-        </ul>
+            </div>
+        </div>
     </main>
 </template>
 
 <style lang="scss" scoped>
-    img {
-        width: 30px;
+    main {
+        height: 90vh;
+        overflow: auto;
+
+        .movie-container, .series-container{
+        display: flex;
+
+        div {
+            margin: 10px;
+        }
+    }
     }
 </style>

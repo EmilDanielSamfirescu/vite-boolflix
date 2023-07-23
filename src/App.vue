@@ -53,8 +53,6 @@ methods: {
 
     <MainComponent />
 
-    <FooterComponent />
-
 </template>
 
 <style lang="scss">
